@@ -130,3 +130,7 @@ class BrailleToKorean:
         text = join_jamos(self.word)
         self.word = ""
         return text
+
+    def check_wod_combine(self):
+        if len(self.word) != 0:
+            self.result += self.join_word()
