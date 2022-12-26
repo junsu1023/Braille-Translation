@@ -1,4 +1,5 @@
 import BrailleList
+from hangul_utils import split_syllables, join_jamos
 
 
 class BrailleToKorean:
@@ -92,6 +93,7 @@ class BrailleToKorean:
 
     def get_final_consonant(self):
         self.word += self.final_consonant.get(self.braille)
+        self.result += self.join_word()
 
     def get_vowel(self):
         self.word += self.vowel.get(self.braille)
@@ -112,3 +114,19 @@ class BrailleToKorean:
             self.get_vowel()
         elif check == 6:
             self.get_number()
+
+    def join_word(self):
+        except_word = "나다마바자카타파하"
+
+        # word의 처음에 모음이 온다면 ex) ㅏㄴ -> 앞에 ㅇ이 생략된 것이므로 ㅇ 추가
+        if list(self.vowel.values()).__contains__(self.word[0:1]):
+            self.word = "ㅇ" + self.word
+
+        if except_word.__contains__(self.word[0:1]) and list(self.vowel.values()).__contains__(self.word[1:2]):
+            sub_string = split_syllables(self.word[0:1])[0:1]
+            self.word = self.word[1:]
+            self.word = sub_string + self.word
+
+        text = join_jamos(self.word)
+        self.word = ""
+        return text
