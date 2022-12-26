@@ -11,6 +11,7 @@ class BrailleToKorean:
         self.number = BrailleList.NumberBraille.number
         self.mark = BrailleList.MarkBraille.mark
         self.result = ""
+        self.word = ""
         self.idx = 0
         self.braille = ()
 
@@ -20,16 +21,19 @@ class BrailleToKorean:
 
             while True:
                 if rest_braille >= 3 and self.three_braille():
+                    self.get_mark()
                     self.idx += 3
                     break
 
                 check = self.two_braille()
                 if rest_braille >= 2 and check:
+                    self.get_word(check)
                     self.idx += 2
                     break
 
                 check = self.one_braille()
                 if rest_braille >= 1 and check:
+                    self.get_word(check)
                     self.idx += 1
                     break
 
@@ -71,3 +75,40 @@ class BrailleToKorean:
         if self.vowel.__contains__(self.braille):
             return 5
         return 0
+
+    def get_mark(self):
+        self.result += self.mark.get(self.braille)
+
+    def get_abbreviation(self):
+        except_word = "나다마바자카타파하"
+
+        if except_word.__contains__(self.abbreviation.get(self.braille)) or len(self.abbreviation.get(self.braille)) == 2:
+            self.word += self.abbreviation.get(self.braille)
+        else:
+            self.result += self.abbreviation.get(self.braille)
+
+    def get_initial_consonant(self):
+        self.word += self.initial_consonant.get(self.braille)
+
+    def get_final_consonant(self):
+        self.word += self.final_consonant.get(self.braille)
+
+    def get_vowel(self):
+        self.word += self.vowel.get(self.braille)
+
+    def get_number(self):
+        self.word += self.number.get(self.braille)
+
+    def get_word(self, check):
+        if check == 1:
+            self.get_mark()
+        elif check == 2:
+            self.get_abbreviation()
+        elif check == 3:
+            self.get_initial_consonant()
+        elif check == 4:
+            self.get_final_consonant()
+        elif check == 5:
+            self.get_vowel()
+        elif check == 6:
+            self.get_number()
