@@ -38,6 +38,9 @@ class BrailleToKorean:
                     self.idx += 1
                     break
 
+        self.check_word_combine()
+        return self.result
+
     def three_braille(self):
         self.braille = self.brailles[self.idx:self.idx + 3]
 
@@ -78,6 +81,7 @@ class BrailleToKorean:
         return 0
 
     def get_mark(self):
+        self.check_word_combine()
         self.result += self.mark.get(self.braille)
 
     def get_abbreviation(self):
@@ -86,9 +90,11 @@ class BrailleToKorean:
         if except_word.__contains__(self.abbreviation.get(self.braille)) or len(self.abbreviation.get(self.braille)) == 2:
             self.word += self.abbreviation.get(self.braille)
         else:
+            self.check_word_combine()
             self.result += self.abbreviation.get(self.braille)
 
     def get_initial_consonant(self):
+        self.check_word_combine()
         self.word += self.initial_consonant.get(self.braille)
 
     def get_final_consonant(self):
@@ -131,6 +137,6 @@ class BrailleToKorean:
         self.word = ""
         return text
 
-    def check_wod_combine(self):
+    def check_word_combine(self):
         if len(self.word) != 0:
             self.result += self.join_word()
