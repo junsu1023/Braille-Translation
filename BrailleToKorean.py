@@ -102,6 +102,8 @@ class BrailleToKorean:
         self.result += self.join_word()
 
     def get_vowel(self):
+        if len(self.word) != 0 and self.vowel.values().__contains__(self.word[-1]):
+            self.result += self.join_word()
         self.word += self.vowel.get(self.braille)
 
     def get_number(self):
