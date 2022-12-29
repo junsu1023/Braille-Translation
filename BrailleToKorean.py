@@ -85,13 +85,8 @@ class BrailleToKorean:
         self.result += self.mark.get(self.braille)
 
     def get_abbreviation(self):
-        except_word = "나다마바자카타파하"
-
-        if except_word.__contains__(self.abbreviation.get(self.braille)) or len(self.abbreviation.get(self.braille)) == 2:
-            self.word += self.abbreviation.get(self.braille)
-        else:
-            self.check_word_combine()
-            self.result += self.abbreviation.get(self.braille)
+        self.check_word_combine()
+        self.result += self.abbreviation.get(self.braille)
 
     def get_initial_consonant(self):
         self.check_word_combine()
@@ -102,7 +97,7 @@ class BrailleToKorean:
         self.result += self.join_word()
 
     def get_vowel(self):
-        if len(self.word) != 0 and list(self.vowel.values()).count(self.word[:-1]) != 0:
+        if len(self.word) != 0 and list(self.vowel.values()).__contains__(self.word[:-1]):
             self.result += self.join_word()
         self.word += self.vowel.get(self.braille)
 
