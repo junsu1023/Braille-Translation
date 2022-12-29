@@ -86,7 +86,7 @@ class BrailleToKorean:
 
     def get_abbreviation(self):
         self.check_word_combine()
-        self.result += self.abbreviation.get(self.braille)
+        self.word += self.abbreviation.get(self.braille)
 
     def get_initial_consonant(self):
         self.check_word_combine()
@@ -97,11 +97,15 @@ class BrailleToKorean:
         self.result += self.join_word()
 
     def get_vowel(self):
+        self.check_word_combine()
+
         if len(self.word) != 0 and list(self.vowel.values()).__contains__(self.word[:-1]):
             self.result += self.join_word()
+
         self.word += self.vowel.get(self.braille)
 
     def get_number(self):
+        self.check_word_combine()
         self.word += self.number.get(self.braille)
 
     def get_word(self, check):
@@ -119,14 +123,14 @@ class BrailleToKorean:
             self.get_number()
 
     def join_word(self):
-        except_word = "나다마바자카타파하"
+        except_word = "가나다라마바사아자차카파하타"
 
         # word의 처음에 모음이 온다면 ex) ㅏㄴ -> 앞에 ㅇ이 생략된 것이므로 ㅇ 추가
         if list(self.vowel.values()).__contains__(self.word[0:1]):
             self.word = "ㅇ" + self.word
 
-        if except_word.__contains__(self.word[0:1]) and list(self.vowel.values()).__contains__(self.word[1:2]):
-            sub_string = split_syllables(self.word[0:1])[0:1]
+        if except_word.__contains__(self.word[0:1]):
+            sub_string = split_syllables(self.word[0:1])
             self.word = self.word[1:]
             self.word = sub_string + self.word
 
