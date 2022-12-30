@@ -178,6 +178,3 @@ def logic():
     # 점자 추출
     braille = tuple(find_braille(test, dist, center_list))
     return braille
-
-
-logic()
