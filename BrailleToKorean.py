@@ -44,11 +44,9 @@ class BrailleToKorean:
 
         check = self.one_braille()
         if length >= 1 and check:
-            if length == 1 and self.brailles[self.idx] == (0, 1, 0, 0, 1, 1): # 맨 뒤가 온점(.)일 경우
-                self.get_mark_braille()
-            else:
-                self.get_word(check)
+            self.get_word(check)
             self.idx += 1
+            return
 
     # 길이가 3인 점자가 있는지 확인(길이가 3인 점자는 mark에만 있으므로 mark만 확인)
     def three_braille(self):
@@ -79,7 +77,18 @@ class BrailleToKorean:
     # 길이가 1인 점자가 있는지 확인(우선순위가 맞는지는 모르겠음)
     def one_braille(self):
         self.braille = self.brailles[self.idx]
-
+        # 맨 뒤가 온점(.)일 경우, 온점과 같은 점자가 있어 미리 처리
+        if self.idx == len(self.brailles) - 1 and self.brailles[self.idx] == (0, 1, 0, 0, 1, 1):
+            self.is_empty_word()
+            self.idx += 1
+            self.result += "."
+            return 0
+            # 띄어쓰기일 경우 클래스로 만들 시 데이터가 단 한 개이므로 굳이 필요없다 생각하여 바로 처리
+        if self.brailles[self.idx] == (0, 0, 0, 0, 0, 0):
+            self.is_empty_word()
+            self.idx += 1
+            self.result += " "
+            return 0
         if self.abbreviation.__contains__(self.braille):
             return 2
         if self.initial_consonant.__contains__(self.braille):
@@ -152,7 +161,8 @@ class BrailleToKorean:
     # 모음 점자 찾는 함수
     def get_vowel_braille(self):
         if self.word != "":
-            if list(self.vowel.values()).__contains__(self.word[-1]):  # word의 맨 뒤가 모음이라면 단어를 합침
+            # word의 맨 뒤가 모음이라면 단어를 합침
+            if list(self.vowel.values()).__contains__(self.word[-1]):
                 self.combine_word()
 
             elif self.except_word.__contains__(self.word[0]):
