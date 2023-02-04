@@ -1,4 +1,6 @@
 from BrailleToKorean import BrailleToKorean
+import webbrowser
+from TTS import tts
 
 
 def test():
@@ -39,7 +41,7 @@ def test():
               (0, 0, 0, 0, 0, 1), (1, 1, 1, 0, 0, 0), (0, 1, 1, 0, 1, 1), (0, 1, 0, 1, 0, 0), (1, 0, 1, 1, 0, 0),
               (0, 1, 1, 0, 1, 1), (1, 0, 1, 0, 1, 0))  # 스위스에 사는 삼십삼살 샴쌍둥이
     test22 = ((1, 0, 1, 1, 1, 1), (1, 1, 0, 0, 0, 1), (0, 1, 0, 0, 1, 0), (0, 1, 0, 1, 0, 0), (1, 0, 1, 1, 1, 1),
-              (0, 0, 1, 1, 0, 0), (0, 1, 0, 1, 0, 0), (1, 1, 1, 0, 1, 0), (0, 1, 0, 0, 0, 1))  #외안됬댐
+              (0, 0, 1, 1, 0, 0), (0, 1, 0, 1, 0, 0), (1, 1, 1, 0, 1, 0), (0, 1, 0, 0, 0, 1))  # 외안됬댐
     test23 = ((0, 0, 0, 1, 1, 0), (1, 1, 1, 1, 0, 0), (1, 1, 1, 0, 1, 0), (0, 1, 0, 0, 0, 0), (1, 0, 0, 0, 0, 0),
               (0, 0, 0, 1, 0, 0), (1, 1, 1, 1, 0, 0), (1, 1, 1, 0, 1, 0), (0, 1, 0, 0, 0, 0), (1, 0, 0, 0, 0, 0),
               (0, 0, 0, 0, 0, 1), (0, 1, 0, 1, 0, 0), (1, 1, 1, 1, 0, 1), (0, 0, 1, 0, 1, 1))  # 뷁궭뚫
@@ -48,38 +50,91 @@ def test():
               (0, 0, 0, 0, 0, 1), (0, 1, 0, 1, 0, 0), (1, 1, 1, 0, 0, 1), (0, 1, 0, 0, 0, 0), (1, 1, 0, 0, 0, 0))  # 똻똵똷
     test25 = ((0, 0, 0, 0, 0, 1), (0, 0, 0, 1, 0, 0), (1, 1, 1, 1, 0, 0), (0, 1, 0, 0, 0, 0), (0, 0, 1, 0, 1, 1),
               (0, 0, 0, 1, 0, 0), (1, 1, 1, 1, 0, 0), (1, 1, 1, 0, 1, 0), (0, 1, 0, 0, 0, 0), (1, 1, 0, 0, 0, 0),
-              (0, 0, 0, 0, 1, 0), (1, 1, 1, 1, 0, 1), (0, 0, 1, 0, 1, 1))  #꿣궯룷
+              (0, 0, 0, 0, 1, 0), (1, 1, 1, 1, 0, 1), (0, 0, 1, 0, 1, 1))  # 꿣궯룷
     test26 = ((0, 0, 0, 0, 0, 1), (0, 0, 0, 1, 0, 1), (1, 1, 1, 0, 0, 1), (0, 1, 0, 0, 0, 0), (0, 0, 1, 0, 1, 1),
               (0, 0, 0, 0, 0, 1), (0, 1, 0, 1, 0, 0), (1, 1, 1, 1, 0, 0), (0, 1, 0, 0, 1, 0), (1, 0, 1, 0, 0, 0),
               (0, 0, 0, 0, 0, 1), (0, 0, 0, 1, 0, 0), (1, 1, 1, 1, 0, 0), (1, 1, 1, 0, 1, 0), (0, 1, 0, 0, 0, 0),
               (1, 0, 0, 0, 0, 0))  # 쫧뚽꿹
 
-    print(BrailleToKorean(test1).translate())
-    print(BrailleToKorean(test2).translate())
-    print(BrailleToKorean(test3).translate())
-    print(BrailleToKorean(test4).translate())
-    print(BrailleToKorean(test5).translate())
-    print(BrailleToKorean(test6).translate())
-    print(BrailleToKorean(test7).translate())
-    print(BrailleToKorean(test8).translate())
-    print(BrailleToKorean(test9).translate())
-    print(BrailleToKorean(test10).translate())
-    print(BrailleToKorean(test11).translate())
-    print(BrailleToKorean(test12).translate())
-    print(BrailleToKorean(test13).translate())
-    print(BrailleToKorean(test14).translate())
-    print(BrailleToKorean(test15).translate())
-    print(BrailleToKorean(test16).translate())
-    print(BrailleToKorean(test17).translate())
+    # print(BrailleToKorean(test1).translate())
+    # tts(BrailleToKorean(test1).translate())
+
+    # print(BrailleToKorean(test2).translate())
+    # tts(BrailleToKorean(test2).translate())
+
+    # print(BrailleToKorean(test3).translate())
+    # tts(BrailleToKorean(test3).translate())
+
+    # print(BrailleToKorean(test4).translate())
+    # tts(BrailleToKorean(test4).translate())
+
+    # print(BrailleToKorean(test5).translate())
+    # tts(BrailleToKorean(test5).translate())
+
+    # print(BrailleToKorean(test6).translate())
+    # tts(BrailleToKorean(test6).translate())
+
+    # print(BrailleToKorean(test7).translate())
+    # tts(BrailleToKorean(test7).translate())
+
+    # print(BrailleToKorean(test8).translate())
+    # tts(BrailleToKorean(test8).translate())
+
+    # print(BrailleToKorean(test9).translate())
+    # tts(BrailleToKorean(test9).translate())
+
+    # print(BrailleToKorean(test10).translate())
+    # tts(BrailleToKorean(test10).translate())
+
+    # print(BrailleToKorean(test11).translate())
+    # tts(BrailleToKorean(test11).translate())
+
+    # print(BrailleToKorean(test12).translate())
+    # tts(BrailleToKorean(test12).translate())
+
+    # print(BrailleToKorean(test13).translate())
+    # tts(BrailleToKorean(test13).translate())
+
+    # print(BrailleToKorean(test14).translate())
+    # tts(BrailleToKorean(test14).translate())
+
+    # print(BrailleToKorean(test15).translate())
+    # tts(BrailleToKorean(test15).translate())
+
+    # print(BrailleToKorean(test16).translate())
+    # tts(BrailleToKorean(test16).translate())
+
+    # print(BrailleToKorean(test17).translate())
+    # tts(BrailleToKorean(test17).translate())
+
     print(BrailleToKorean(test18).translate())
-    print(BrailleToKorean(test19).translate())
-    print(BrailleToKorean(test20).translate())
-    print(BrailleToKorean(test21).translate())
-    print(BrailleToKorean(test22).translate())
-    print(BrailleToKorean(test23).translate())
-    print(BrailleToKorean(test24).translate())
-    print(BrailleToKorean(test25).translate())
-    print(BrailleToKorean(test26).translate())
+    tts(BrailleToKorean(test18).translate())
+
+    # print(BrailleToKorean(test19).translate())
+    # tts(BrailleToKorean(test19).translate())
+
+    # print(BrailleToKorean(test20).translate())
+    # tts(BrailleToKorean(test20).translate())
+
+    # print(BrailleToKorean(test21).translate())
+    # tts(BrailleToKorean(test21).translate())
+
+    # print(BrailleToKorean(test22).translate())
+    # tts(BrailleToKorean(test22).translate())
+
+    # print(BrailleToKorean(test23).translate())
+    # tts(BrailleToKorean(test23).translate())
+
+    # print(BrailleToKorean(test24).translate())
+    # tts(BrailleToKorean(test24).translate())
+
+    # print(BrailleToKorean(test25).translate())
+    # tts(BrailleToKorean(test25).translate())
+
+    # print(BrailleToKorean(test26).translate())
+    # tts(BrailleToKorean(test26).translate())
+
+    webbrowser.open("translate.mp3")
 
 
 test()
