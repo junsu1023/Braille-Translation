@@ -25,13 +25,17 @@ class BrailleToKorean:
 
     # 번역부
     def translate(self):
-        while self.idx != len(self.brailles):  # 모든 점자를 순환
-            rest_braille = len(self.brailles) - self.idx  # 남은 점자의 갯수
+        try:
+            while self.idx != len(self.brailles):  # 모든 점자를 순환
+                rest_braille = len(self.brailles) - self.idx  # 남은 점자의 갯수
 
-            self.check_braille_length(rest_braille)
+                self.check_braille_length(rest_braille)
 
-        self.is_empty_word()
-        return self.result
+            self.is_empty_word()
+            return self.result
+        except Exception:
+            # TTS를 통해 "번역하지 못하는 점자입니다"를 출력하면 될듯
+            return False
 
     # 갯수에 따른 점자 찾는 함수
     def check_braille_length(self, length):
@@ -219,31 +223,35 @@ class BrailleToKorean:
 
     # 단어 합치는 함수
     def combine_word(self):
-        if self.word.__contains__("ㄱㅅ"):
-            self.word = self.word.replace("ㄱㅅ", "ㄳ")
-        if self.word.__contains__("ㄴㅈ"):
-            self.word = self.word.replace("ㄴㅈ", "ㄵ")
-        if self.word.__contains__("ㄴㅎ"):
-            self.word = self.word.replace("ㄴㅎ", "ㄶ")
-        if self.word.__contains__("ㄹㄱ"):
-            self.word = self.word.replace("ㄹㄱ", "ㄺ")
-        if self.word.__contains__("ㄹㅁ"):
-            self.word = self.word.replace("ㄹㅁ", "ㄻ")
-        if self.word.__contains__("ㄹㅂ"):
-            self.word = self.word.replace("ㄹㅂ", "ㄼ")
-        if self.word.__contains__("ㄹㅅ"):
-            self.word = self.word.replace("ㄹㅅ", "ㄽ")
-        if self.word.__contains__("ㄹㅌ"):
-            self.word = self.word.replace("ㄹㅌ", "ㄾ")
-        if self.word.__contains__("ㄹㅍ"):
-            self.word = self.word.replace("ㄹㅍ", "ㄿ")
-        if self.word.__contains__("ㄹㅎ"):
-            self.word = self.word.replace("ㄹㅎ", "ㅀ")
-        if self.word.__contains__("ㅂㅅ"):
-            self.word = self.word.replace("ㅂㅅ", "ㅄ")
+        self.replace_word()
 
         if list(self.vowel.values()).__contains__(self.word[0]):  # word의 맨 앞이 모음일 경우 ㅇ 추가
             self.word = "ㅇ" + self.word
 
         self.result += join_jamos(self.word)
         self.word = ""
+
+    # 곁받침 처리 위한 함수
+    def replace_word(self):
+        if self.word.__contains__("ㄱㅅ"):
+            self.word = self.word.replace("ㄱㅅ", "ㄳ")
+        elif self.word.__contains__("ㄴㅈ"):
+            self.word = self.word.replace("ㄴㅈ", "ㄵ")
+        elif self.word.__contains__("ㄴㅎ"):
+            self.word = self.word.replace("ㄴㅎ", "ㄶ")
+        elif self.word.__contains__("ㄹㄱ"):
+            self.word = self.word.replace("ㄹㄱ", "ㄺ")
+        elif self.word.__contains__("ㄹㅁ"):
+            self.word = self.word.replace("ㄹㅁ", "ㄻ")
+        elif self.word.__contains__("ㄹㅂ"):
+            self.word = self.word.replace("ㄹㅂ", "ㄼ")
+        elif self.word.__contains__("ㄹㅅ"):
+            self.word = self.word.replace("ㄹㅅ", "ㄽ")
+        elif self.word.__contains__("ㄹㅌ"):
+            self.word = self.word.replace("ㄹㅌ", "ㄾ")
+        elif self.word.__contains__("ㄹㅍ"):
+            self.word = self.word.replace("ㄹㅍ", "ㄿ")
+        elif self.word.__contains__("ㄹㅎ"):
+            self.word = self.word.replace("ㄹㅎ", "ㅀ")
+        elif self.word.__contains__("ㅂㅅ"):
+            self.word = self.word.replace("ㅂㅅ", "ㅄ")
