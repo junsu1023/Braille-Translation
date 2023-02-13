@@ -33,8 +33,8 @@ class BrailleToKorean:
 
             self.is_empty_word()
             return self.result
-        except Exception:
-            # TTS를 통해 "번역하지 못하는 점자입니다"를 출력하면 될듯
+
+        except ValueError:
             return False
 
     # 갯수에 따른 점자 찾는 함수
@@ -56,6 +56,8 @@ class BrailleToKorean:
             self.get_word(check, 1)
             self.idx += 1
             return
+
+        raise ValueError
 
     # 길이가 3인 점자가 있는지 확인
     def three_braille(self):
@@ -179,7 +181,7 @@ class BrailleToKorean:
             if (self.vowel.__contains__(self.brailles[self.idx + braille_length]) or
                     self.elid_leeeung.__contains__(self.brailles[self.idx + braille_length])):  # 현재: 가 + 다음: ㅏ -> 현재: ㄱ
                 self.word += split_word(self.abbreviation.get(self.braille))[:1]
-            else:  # 다음에 오는 단어가 모음이 아니라면 word에 있는 것을 미리 합치고 word에 추가해줌(가나다마바사자카타파하는 앞에 붙일게 없으므로)
+            else:  # 다음에 오는 단어가 모음이 아니라면 word에 있는 것을 미리 합치고 word에 추가(가나다마바사자카타파하는 앞에 붙일게 없으므로)
                 self.is_empty_word()
                 self.word += split_word(self.abbreviation.get(self.braille))
             return
