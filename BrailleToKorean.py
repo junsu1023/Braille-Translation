@@ -33,8 +33,7 @@ class BrailleToKorean:
 
             self.is_empty_word()
             return self.result
-
-        except ValueError:
+        except:
             return False
 
     # 갯수에 따른 점자 찾는 함수
@@ -56,8 +55,6 @@ class BrailleToKorean:
             self.get_word(check, 1)
             self.idx += 1
             return
-
-        raise ValueError
 
     # 길이가 3인 점자가 있는지 확인
     def three_braille(self):
