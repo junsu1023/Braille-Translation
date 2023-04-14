@@ -56,6 +56,12 @@ def test():
               (0, 0, 0, 0, 0, 1), (0, 0, 0, 1, 0, 0), (1, 1, 1, 1, 0, 0), (1, 1, 1, 0, 1, 0), (0, 1, 0, 0, 0, 0),
               (1, 0, 0, 0, 0, 0))  # 쫧뚽꿹
 
+    test27 = ((0, 1, 0, 1, 0, 0), (1, 1, 1, 0, 0, 0), (0, 1, 0, 0, 1, 0), (0, 1, 0, 1, 1, 0), (1, 0, 1, 0, 0, 1), (0, 1, 0, 0, 0, 0))
+
+    test28 = ((0, 0, 0, 1, 0, 1), (1, 0, 1, 1, 1, 0), (0, 0, 1, 1, 1, 1), (0, 1, 0, 1, 0, 0), (0, 0, 0, 0, 0, 1), (0, 1, 0, 1, 0, 1)
+              , (1, 1, 0, 0, 1, 0), (0, 1, 1, 1, 0, 0), (0, 1, 0, 1, 0, 0), (1, 0, 1, 0, 1, 0), (0, 0, 0, 0, 1, 0), (1, 0, 1, 1, 0, 0),
+              (0, 1, 0, 0, 0, 1))
+
     print(BrailleToKorean(test1).translate())
     # tts(BrailleToKorean(test1).translate())
 
@@ -133,6 +139,10 @@ def test():
 
     print(BrailleToKorean(test26).translate())
     # tts(BrailleToKorean(test26).translate())
+
+    print(BrailleToKorean(test27).translate())
+
+    print(BrailleToKorean(test28).translate())
 
     #webbrowser.open("translate.mp3")
 
