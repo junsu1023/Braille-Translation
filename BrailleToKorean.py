@@ -121,11 +121,6 @@ class BrailleToKorean:
         elif check == 6:
             self.get_number_braille()
 
-    # 기호 점자 찾는 함수
-    # def get_mark_braille(self):
-    #     self.is_empty_word()
-    #     self.result += self.mark.get(self.braille)
-
     # 약어 점자 찾는 함수
     def get_abbreviate_braille(self, braille_length):
         if self.elid_leeeung.__contains__(self.braille):  # 초성이 ㅇ인 약자는 word에 추가
