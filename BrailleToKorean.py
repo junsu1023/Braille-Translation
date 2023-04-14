@@ -16,12 +16,12 @@ class BrailleToKorean:
         self.vowel = BrailleList.VowelBraille.vowel
         self.abbreviation = BrailleList.AbbreviateBraille.abbreviation
         self.number = BrailleList.NumberBraille.number
-        # self.mark = BrailleList.MarkBraille.mark
         self.elid_leeeung = BrailleList.AbbreviateBraille.elid_leeeung
         self.result = ""
         self.word = ""
         self.idx = 0
         self.except_word = "가나다마바사자카타파하까따빠싸짜"
+        self.isNumber = False
 
     # 번역부
     def translate(self):
@@ -33,6 +33,7 @@ class BrailleToKorean:
 
             self.is_empty_word()
             return self.result
+
         except:
             return False
 
@@ -40,18 +41,26 @@ class BrailleToKorean:
     def check_braille_length(self, length):
         check = self.three_braille()
         if length >= 3 and check:
+            self.isNumber = False
             self.get_word(check, 3)
             self.idx += 3
             return
 
         check = self.two_braille()
         if length >= 2 and check:
+            self.isNumber = False
             self.get_word(check, 2)
             self.idx += 2
             return
 
         check = self.one_braille()
         if length >= 1 and check:
+            if self.isNumber:
+                if self.number.__contains__(self.braille):
+                    check = 6
+                else:
+                    self.isNumber = False
+
             self.get_word(check, 1)
             self.idx += 1
             return
@@ -62,11 +71,9 @@ class BrailleToKorean:
 
         if self.abbreviation.__contains__(self.braille):
             return 2
-        # if self.mark.__contains__(self.braille):
-        #     return 1
         return 0
 
-    # 길이가 2인 점자가 있는지 확인(우선순위가 맞는지는 모르겠음)
+    # 길이가 2인 점자가 있는지 확인
     def two_braille(self):
         self.braille = self.brailles[self.idx:self.idx + 2]
 
@@ -78,20 +85,26 @@ class BrailleToKorean:
             return 4
         if self.vowel.__contains__(self.braille):
             return 5
-        # if self.mark.__contains__(self.braille):
-        #     return 1
         return 0
 
-    # 길이가 1인 점자가 있는지 확인(우선순위가 맞는지는 모르겠음)
+    # 길이가 1인 점자가 있는지 확인
     def one_braille(self):
         self.braille = self.brailles[self.idx]
 
-        # 띄어쓰기일 경우 클래스로 만들 시 데이터가 단 한 개이므로 굳이 필요없다 생각하여 바로 처리
+        # 띄어쓰기일 경우 클래스로 만들 시 데이터가 단 한 개이므로 굳이 필요없다고 생각하여 바로 처리
         if self.brailles[self.idx] == (0, 0, 0, 0, 0, 0):
             self.is_empty_word()
             self.idx += 1
             self.result += " "
             return 0
+
+        # 추가된 부분
+        if self.brailles[self.idx] == (0, 0, 1, 1, 1, 1):
+            self.is_empty_word()
+            self.idx += 1
+            self.braille = self.brailles[self.idx]
+            self.isNumber = True
+            return 6
         if self.abbreviation.__contains__(self.braille):
             return 2
         if self.initial_consonant.__contains__(self.braille):
@@ -100,10 +113,9 @@ class BrailleToKorean:
             return 4
         if self.vowel.__contains__(self.braille):
             return 5
-        # if self.mark.__contains__(self.braille):
-        #     return 1
         if self.number.__contains__(self.braille):
             return 6
+
         return 0
 
     # 각 점자 찾는 함수로 이동
