@@ -86,31 +86,6 @@ class BrailleToKorean:
     def one_braille(self):
         self.braille = self.brailles[self.idx]
 
-        # 밑의 기호가 여러 개일 때 ex) ○○○ 처리
-        # if self.braille == (0, 0, 0, 1, 1, 1):
-        #     self.idx += 1
-        #     closeIndex = self.brailles.index((1, 1, 1, 0, 0, 0))
-        #     for i in range(self.idx, closeIndex + 1):
-        #         if self.brailles[i] == (1, 0, 1, 1, 0, 1):
-        #             self.result += "×"
-        #         elif self.brailles[i] == (0, 0, 1, 0, 1, 1):
-        #             self.result += "○"
-        #         elif self.brailles[i] == (0, 0, 1, 1, 0, 1):
-        #             self.result += "△"
-        #         elif self.brailles[i] == (0, 1, 1, 0, 1, 1):
-        #             self.result += "□"
-        #         elif self.brailles[i] == (1, 1, 1, 0, 0, 0):
-        #             self.result += ""
-        #         self.idx += 1
-        #     return 0
-
-        # 맨 뒤가 온점(.)일 경우, 온점과 같은 점자가 있어 미리 처리
-        # if self.idx == len(self.brailles) - 1 and self.brailles[self.idx] == (0, 1, 0, 0, 1, 1):
-        #     self.is_empty_word()
-        #     self.idx += 1
-        #     self.result += "."
-        #     return 0
-
         # 띄어쓰기일 경우 클래스로 만들 시 데이터가 단 한 개이므로 굳이 필요없다 생각하여 바로 처리
         if self.brailles[self.idx] == (0, 0, 0, 0, 0, 0):
             self.is_empty_word()
