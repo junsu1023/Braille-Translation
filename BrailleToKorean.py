@@ -22,6 +22,7 @@ class BrailleToKorean:
         self.idx = 0
         self.except_word = "가나다마바사자카타파하까따빠싸짜"
         self.isNumber = False
+        self.isInitial = False
 
     # 번역부
     def translate(self):
@@ -100,20 +101,27 @@ class BrailleToKorean:
 
         # 추가된 부분
         if self.brailles[self.idx] == (0, 0, 1, 1, 1, 1):
+            self.isInitial = False
             self.is_empty_word()
             self.idx += 1
             self.braille = self.brailles[self.idx]
             self.isNumber = True
             return 6
         if self.abbreviation.__contains__(self.braille):
+            self.isInitial = False
             return 2
         if self.initial_consonant.__contains__(self.braille):
+            self.isInitial = False
             return 3
         if self.final_consonant.__contains__(self.braille):
-            return 4
+            #if not list(self.initial_consonant.values()).__contains__(self.word[-1]):
+            if not self.isInitial:
+                return 4
         if self.vowel.__contains__(self.braille):
+            self.isInitial = False
             return 5
         if self.number.__contains__(self.braille):
+            self.isInitial = False
             return 6
 
         return 0
@@ -169,6 +177,7 @@ class BrailleToKorean:
 
     # 초성 점자 찾는 함수
     def get_initial_consonant_braille(self):
+        self.isInitial = True
         self.is_empty_word()
         self.word += self.initial_consonant.get(self.braille)
 
